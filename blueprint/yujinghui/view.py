@@ -11,6 +11,7 @@ from sqlalchemy import or_, between
 yujinghui = Blueprint('yujinghui', __name__,
                       template_folder='templates/')
 
-@yujinghui.route('/yujinghui', methods = ['GET','POST'])
+@yujinghui.route('/yujinghui', methods = ['GET',])
 def resume():
+    print "ensure route"
     return render_template("yujinghui.html")
