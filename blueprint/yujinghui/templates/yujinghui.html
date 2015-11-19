@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>五星级酒店免费住</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/activity/static/css/wuxing.css">
+</head>
+<body>
+    <div class="banner"><img src="/activity/static/image/wuxing/banner.jpg"></div>
+    <div class="wrap">
+        <p class="pColor content">亲，鹰漠又来送福利啦！凡于5月28日－6月1日在鹰漠旅行预订酒店，即可参与“儿童节，五星级酒店免费住”活动抽奖，获得五星级酒店免费住宿机会！
+        </p>
+        <div class="content">
+            <span class="spColor">活动时间：</span>
+            <br> <span class="foReSize">2015年5月28日－6月1日</span>
+        </div>
+        <div class="content">
+            <span class="spColor">奖品设置：</span>
+            <ul>
+                <li><span class="foReSize">五星级酒店行政套房免费住宿一晚，共5份</span>
+                </li>
+                <li><span class="foReSize">五星级酒店大床房免费住宿一晚，共50份 （本次活动指定合作五星级酒店：喜来登、万豪、皇冠假日、香格里拉、索菲特、威斯汀等）</span>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <span class="spColor">参与方式：</span>
+            <ul>
+                <li><span class="foReSize">活动期间，凡通过鹰漠旅行下单预订酒店，即可参与“儿童节，五星级酒店免费住”活动抽奖，有机会获得五星级酒店免费住宿一晚；</span>
+                </li>
+                <li><span class="foReSize">每天送出1份五星级行政套房免费住宿一晚（共5份），10份五星级酒店大床房免费住宿一晚（共50份）；</span>
+                </li>
+                <li><span class="foReSize">本次活动仅限鹰漠旅行注册用户参与；</span>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <span class="spColor">领奖方式：</span>
+            <ul>  
+                <li><span class="foReSize">中奖名单于6月2日在鹰漠旅行APP活动页面及官方微信订阅号“innmall”公布；</span>
+                </li>
+                <li><span class="foReSize">中奖者在收到鹰漠中奖通知短信后，请关注官方微信客服号“loveinnmall”领奖；</span>
+                </li>
+                <li><span class="foReSize">奖品领取有效期：6月2日－9月1日，逾期领取无效。</span>
+                </li>
+            </ul>
+        </div>
+        <div class="scroll">
+            <a href="/activity/wuxing/list" style="color:white;">
+                <div class="title">
+                    <div class="line"></div><span>查看获奖名单</span>
+                </div>
+            </a>            
+        </div>
+        <!-- <p class="pColor more"><a href="#">更多获奖名单&raquo;</a></p> -->
+    </div>
+</body>
+<script type="text/javascript" src="/activity/static/js/zepto.min.js"></script> 
+<script type="text/javascript">
+function ScrollObj(obj){
+        this.step = 0.1;
+        this.move = 0;
+        this.scro_obj = obj;
+        this.scro_height = obj.height(); 
+        //this.clear_obj = null;        
+    }
+
+//滚动显示
+ScrollObj.prototype.up = function(){
+    var obj = this;//闭包，供内部函数调用this
+    //实例方法再调用实例方法，this将不再是实例，因此采用内部方法闭包的方式确保this的传递
+    var to_up = function(){         
+        //if(obj.move < obj.scro_height){
+            if(obj.move >= obj.scro_height/2){
+                obj.move = 0;
+            }           
+            obj.scro_obj.css("top","-"+obj.move+"px");
+            obj.move = obj.move + obj.step;
+            // console.log("move:"+obj.move+";step:"+obj.step);
+        // }else{
+        //  console.log("clear");
+        //  clearTimeout(obj.clear_obj);
+        // }
+    }
+
+    this.clear_obj = setInterval(to_up,17);
+    
+}
+
+var s = new ScrollObj($("#list_wrapper"));
+s.up();
+</script>
+</html>
