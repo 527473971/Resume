@@ -14,4 +14,5 @@ yujinghui = Blueprint('yujinghui', __name__,
 @yujinghui.route('/yujinghui', methods = ['GET',])
 def resume():
     print "ensure route"
+    print "ensure route"
     return render_template("yujinghui.html")
