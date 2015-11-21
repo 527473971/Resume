@@ -9,9 +9,9 @@ from sqlalchemy.ext.declarative import declarative_base
 cfg_info = {
     "dbhost": "localhost",
     "dbport": 3306,
-    "dbpasswd": "",
+    "dbpasswd": "root",
     "dbuser": "root",
-    "dbname": "myowndemo"
+    "dbname": "resume"
 }
 
 
