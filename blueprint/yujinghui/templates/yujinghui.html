@@ -19,6 +19,9 @@
     <!-- Custom Fonts -->
     <link href="/yujinghui/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <script src="/yujinghui/static/js/jquery-2.1.4.min.js"></script>
+    <script src="/yujinghui/static/js/bootstrap.min.js"></script>
+    <script src="/yujinghui/static/js/grayscale.js"></script>
 
 </head>
 
@@ -87,26 +90,28 @@
                 <h5>教育经历</h5>
             </div>
             {% for i, edu in educ %}
-            {% if i == 0%}<div class="col-lg-6">
-            {% else %}<div class="col-lg-6 col-lg-offset-3">
-            {% endif %}
+            {% if i == 0%}
+            <div class="col-lg-6">
+                {% else %}
+                <div class="col-lg-6 col-lg-offset-3">
+                    {% endif %}
 
-                <p>{{ edu.school }}<br/>
-                    {{ edu.major }} <br/>
-                    <i>{{ edu.timeRange }}</i>
-                </p>
+                    <p>{{ edu.school }}<br/>
+                        {{ edu.major }} <br/>
+                        <i>{{ edu.timeRange }}</i>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <p>{{ edu.timeRange }}</p>
+                </div>
+                {% endfor %}
             </div>
-            <div class="col-lg-3">
-                <p>{{ edu.timeRange }}</p>
+            <div class="row">
+                <a href="#work" class="btn btn-circle page-scroll">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
             </div>
-            {% endfor %}
         </div>
-        <div class="row">
-            <a href="#work" class="btn btn-circle page-scroll">
-                <i class="fa fa-angle-double-down animated"></i>
-            </a>
-        </div>
-    </div>
 </section>
 
 <!-- work exper Section -->
@@ -117,25 +122,27 @@
                 <h5>工作经验</h5>
             </div>
             {% for i, wk in work %}
-            {% if i == 0%}<div class="col-lg-6">
-            {% else %}<div class="col-lg-6 col-lg-offset-3">
-            {% endif %}
-                <p>{{ wk.vocation }}<br/>
-                    {{ wk.corpName }} <br/>
-                    <i>1.5 Years</i>
-                </p>
+            {% if i == 0%}
+            <div class="col-lg-6">
+                {% else %}
+                <div class="col-lg-6 col-lg-offset-3">
+                    {% endif %}
+                    <p>{{ wk.vocation }}<br/>
+                        {{ wk.corpName }} <br/>
+                        <i>1.5 Years</i>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <p>{{ wk.timeRange }}</p>
+                </div>
+                {% endfor %}
             </div>
-            <div class="col-lg-3">
-                <p>{{ wk.timeRange }}</p>
+            <div class="row">
+                <a href="#contact" class="btn btn-circle page-scroll">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
             </div>
-            {% endfor %}
         </div>
-        <div class="row">
-            <a href="#contact" class="btn btn-circle page-scroll">
-                <i class="fa fa-angle-double-down animated"></i>
-            </a>
-        </div>
-    </div>
 </section>
 
 
@@ -177,12 +184,6 @@
                    href="https://github.com/IronSummitMedia/startbootstrap-grayscale">Grayscale</a></p>
     </div>
 </footer>
-
-<script src="/yujinghui/static/js/jquery.js"></script>
-<script src="/yujinghui/static/js/bootstrap.min.js"></script>
-<script src="/yujinghui/static/js/jquery.easing.min.js"></script>
-<script src="/yujinghui/static/js/grayscale.js"></script>
-
 </body>
 
 </html>
