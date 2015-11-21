@@ -18,7 +18,6 @@ def resume():
         resu = Resume.query.filter(Resume.realName == "于敬晖").first()
         educ = Education.query.filter(Education.uid == resu.id).all()
         work = Work.query.filter(Work.uid == resu.id).all()
-        print resu.realName
         return render_template("yujinghui.html", resu=resu, educ=enumerate(educ), work=enumerate(work))
     except:
         print format_exc()
