@@ -4,12 +4,12 @@ $(function () {
     var editor = CodeMirror.fromTextArea(code[0], {
         lineNumbers: true,
         mode: "text",
-        theme: 'midnight'
+        theme: 'blackboard'
     });
     var output = CodeMirror.fromTextArea(out[0], {
         lineNumbers: true,
         mode: "text",
-        theme: 'midnight'
+        theme: 'blackboard'
     });
     window.onkeydown = function (event) {
         if (event.keyCode == 13) {
