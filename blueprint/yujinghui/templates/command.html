@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang=en>
+<head>
+    <title>Yujinghui's Terminal</title>
+    <meta charset=utf8>
+    <link rel=stylesheet href="/yujinghui/static/css/grayscale.css">
+    <link rel=stylesheet href="/yujinghui/static/theme/midnight.css">
+    <link rel=stylesheet href="/yujinghui/static/css/codemirror.css">
+    <script src="/yujinghui/static/js/codemirror.js"></script>
+    <script src="/yujinghui/static/js/jquery-2.1.4.min.js"></script>
+    <script src="/yujinghui/static/js/editor.js"></script>
+
+</head>
+<body>
+<div class="workboard">
+    <div><h4>输入命令:</h4><textarea id="code"></textarea></div>
+    <div><h4>结果:</h4><textarea id="output"></textarea></div>
+</div>
+
+<div class="whiteboard">
+    <div>
+        <h3>有话说</h3>
+        <p f>
+            下面是一些语法帮助,你可以按照这个来输入命令,输入的命令全程有我自己练手的编译器支持,
+            该编译器由C实现,不要认为我这个解释器会很厉害,我的编译原理水平连半吊子都算不上,所以,
+            出现什么异常情况不要大惊小怪好吧~
+        </p>
+
+        <h3>提示</h3>
+        <p>
+            //定义字符串 String str = "hello"<br/>
+            //定义整数 Integer str = 1<br/>
+            //是的,你没猜错,就这两种类型<br/>
+
+            //这个才刚刚开始,也许以后会有更多功能的...<br/>
+        </p>
+    </div>
+</div>
+<div class="sidebar">
+    <div>
+        <ul><a href="/yujinghui">我</a></ul>
+        <ul><a href="/blog">我的blog</a></ul>
+    </div>
+</div>
+
+</body>
+</html>
