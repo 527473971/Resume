@@ -4,7 +4,7 @@ from dataPersist.db import BaseModel
 
 __author__ = 'yujinghui'
 from sqlalchemy import Column
-from sqlalchemy.types import Integer, String
+from sqlalchemy.types import Integer, String, CHAR
 
 class Resume(BaseModel):
     __tablename__ = 'resume'
@@ -12,6 +12,8 @@ class Resume(BaseModel):
     realName = Column(String(11))
     sex = Column(String(11))
     intro = Column(String(50))
+    userName = Column(String(20))
+    password = Column(CHAR(32))
 
 
 class Education(BaseModel):
