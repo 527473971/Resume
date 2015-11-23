@@ -19,6 +19,21 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.backstretch.min.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <script>
+        $(function () {
+            var verify = $("#form-verify");
+            verify.dblclick(function () {
+                var img_src = '/authCode?' + Math.random();
+                $(this).css("background", "url(" + img_src + ")  no-repeat")
+                        .css('background-position', 'right')
+                        .css('background-color', '#FFF');
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -53,7 +68,7 @@
                         <form role="form" action="/register" method="POST" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Email</label>
-                                <input type="text" name="form-username" placeholder="邮箱"
+                                <input type="email" name="form-username" placeholder="邮箱"
                                        class="form-username form-control" id="form-username">
                             </div>
                             <div class="form-group">
@@ -69,8 +84,9 @@
                             <div class="form-group">
                                 <label class="sr-only" for="form-verify">验证码</label>
 
-                                <input type="text" id="form-verify" maxlength="5"
-                                       class="form-username form-control" placeholder="验证码" name="form-verify">
+                                <input type="" id="form-verify" maxlength="5"
+                                       class="form-username form-control"
+                                       name="form-verify" placeholder="验证码,双击更换验证码">
                             </div>
                             <button type="submit" class="btn">注册</button>
                         </form>
@@ -89,10 +105,6 @@
     </div>
 </div>
 </div>
-<script src="assets/js/jquery-1.11.1.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.backstretch.min.js"></script>
-<script src="assets/js/scripts.js"></script>
 </body>
 
 </html>
