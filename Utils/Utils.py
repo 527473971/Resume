@@ -13,7 +13,7 @@ _numbers = ''.join(map(str, range(3, 10)))
 init_chars = ''.join((_letter_cases, _upper_cases, _numbers))
 
 
-def create_validata_code(size=(120, 30), chars=init_chars, img_type='jpg',
+def create_validata_code(size=(120, 50), chars=init_chars, img_type='jpg',
                          mode='RGB', bg_color=(255, 255, 255), fg_color=(0, 0, 255),
                          font_size=18, font_type='Arial.ttf',
                          length=5, draw_lines=True, n_line=(1, 2),
