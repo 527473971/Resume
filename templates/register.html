@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Login Form Template</title>
+    <title>Resume Register</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
@@ -26,12 +26,36 @@
     <script>
         $(function () {
             var verify = $("#form-verify");
+            var img_src = '/authCode?' + Math.random();
+            var registerbtn = $("#registerbtn");
+            var res = $('#result');
+            verify.css("background", "url(" + img_src + ")  no-repeat")
+                    .css('background-position', 'right')
+                    .css('background-color', '#FFF');
             verify.dblclick(function () {
-                var img_src = '/authCode?' + Math.random();
-                $(this).css("background", "url(" + img_src + ")  no-repeat")
+                var authsrc = '/authCode?' + Math.random();
+                $(this).css("background", "url(" + authsrc + ")  no-repeat")
                         .css('background-position', 'right')
                         .css('background-color', '#FFF');
             });
+            registerbtn.click(function () {
+                $.post('/register', {
+                    "form-username": $('#form-username').val(),
+                    "form-password": $('#form-password').val(),
+                    "form-name": $('#form-name').val(),
+                    "form-verify":$('#form-verify').val()
+                }, function (mesg) {
+                    if (mesg['status'] == 1) {
+                        window.location = mesg['nexturl'];
+                    } else {
+                        res.show();
+                        res.append(mesg["msg"]);
+                        showDiv(res);
+                    }
+
+                });
+            });
+            res.fadeIn(1);
         });
     </script>
 </head>
@@ -65,7 +89,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="/register" method="POST" class="login-form">
+                        <div role="form" class="login-form" id="registerid">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Email</label>
                                 <input type="email" name="form-username" placeholder="邮箱"
@@ -88,8 +112,8 @@
                                        class="form-username form-control"
                                        name="form-verify" placeholder="验证码,双击更换验证码">
                             </div>
-                            <button type="submit" class="btn">注册</button>
-                        </form>
+                            <button type="button" class="btn" id="registerbtn">注册</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,6 +129,7 @@
     </div>
 </div>
 </div>
+<div id="result" style="visibility: hidden"></div>
 </body>
 
 </html>

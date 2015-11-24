@@ -1,11 +1,22 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 import hashlib
+import smtplib
 
 __author__ = 'yujinghui'
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import io, random
+
+emailurl = {
+    '126.com': 'http://mail.126.com',
+    'hotmail.com': 'http://mail.live.com',
+    'gmail.com': 'http://mail.google.com',
+    '163.com': 'http://mail.163.com',
+    'yahoo.com': 'http://mail.yahoo.com',
+    '139.com': 'http://mail.139.com',
+    'qq.com': 'http://mail.qq.com',
+}
 
 _letter_cases = 'abcdefghjkmnpqrstuvwxy'
 _upper_cases = _letter_cases.upper()
@@ -73,3 +84,10 @@ def create_validata_code(size=(120, 50), chars=init_chars, img_type='jpg',
 def genMd5(str):
     m = hashlib.md5(str)
     return m.hexdigest()
+
+
+def sendVerifyEmail(email):
+    try:
+        return emailurl[email.split("@")[1]]
+    except KeyError:
+        return ""
