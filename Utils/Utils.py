@@ -91,3 +91,11 @@ def sendVerifyEmail(email):
         return emailurl[email.split("@")[1]]
     except KeyError:
         return ""
+
+from functools import wraps
+def auth(func):
+    @wraps
+    def wraps_fucntion(*args, **kwargs):
+        pass
+
+    return wraps_fucntion()

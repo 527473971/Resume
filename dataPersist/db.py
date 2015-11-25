@@ -59,17 +59,15 @@ class BaseModel(object):
             print "where :", self.__sql__
             con = self.pool.getConn()
             try:
-                cur = con.cursor()
+                cur, res = con.cursor(), 0
                 res = cur.execute(self.__sql__)
                 if self.__sqltype__ == "select":
                     ress = cur.fetchall()
                     resumes = list()
                     for res in ress:
                         tmp = type(self.__tablename__, (), {})()
-                        print self.__columns__
                         for i, column in enumerate(self.__columns__):
                             setattr(tmp, column, res[i])
-                            print '====>', column, res[i]
                         resumes.append(tmp)
                     return resumes
                 elif self.__sqltype__ == "update":
@@ -111,7 +109,7 @@ class BaseModel(object):
 class resume(BaseModel):
     __tablename__ = 'resume'
     # 这里需要能够动态生成才行啊,我勒个去的啊
-    __selfDefinedAttr__ = ('id', 'realName', 'sex', 'intro', 'username', 'password')
+    __selfDefinedAttr__ = ('id', 'realName', 'sex', 'intro', 'username', 'password', 'myDomain')
 
     id = INT(11)
     realName = VARCHAR(30)

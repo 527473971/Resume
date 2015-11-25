@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 from traceback import format_exc
 from flask import Flask, render_template, \
-    request, session, jsonify
+    request, session, jsonify, redirect, url_for
 from flask import make_response
 from sqlalchemy import Table
 from blueprint.member.view import member
 from Utils.Utils import create_validata_code, genMd5, sendVerifyEmail
-import io
+import io, logging
 from dataPersist.db import resume
-from dataPersist.dbpool import dataConnectionPool
+from flask.ext.login import login_required, logout_user
 
 app = Flask('Resume', template_folder="templates/",
             static_folder="assets/",
@@ -31,9 +31,14 @@ def shutdown_session(exception=None):
 @app.route("/", methods=['GET'])
 def index():
     try:
-        return render_template("index.html")
+        print '/ ',session["user"], session['myDomain']
+        if session["user"] is not None and session['myDomain'] is not None:
+            return render_template("setting.html", name=session["user"])
+        else:
+            return render_template("index.html")
     except:
         print format_exc()
+        return render_template("index.html")
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -47,11 +52,13 @@ def login():
             return jsonify({"status": 0, "msg": "用户不存在"})
         if genMd5(postpassword) == resu[0].password:
             session['user'] = postName
+            session['myDomain'] = resu[0].myDomain
+            print "login ==> ",postName, resu[0].myDomain
             if resu[0].myDomain is None or resu[0].myDomain == 'null' or len(resu[0].myDomain) == 0:
                 resu[0].myDomain = 'setting'
             return jsonify({"status": 1, "msg": "登录成功", "nexturl": resu[0].myDomain})
         else:
-            return jsonify({{"status": 0, "msg": "用户或密码错误"}})
+            return jsonify({"status": 0, "msg": "用户或密码错误"})
     except:
         print format_exc()
 
@@ -70,6 +77,7 @@ def register():
                 re = resume()
                 registerSuccess = re.insert(username=email, password=password, realName=name)
                 # 如果插入失败registerSuccess返回啥哩?
+                session.pop('auth_code')
                 if registerSuccess:
                     try:
                         emailUrl = sendVerifyEmail(email)
@@ -106,14 +114,27 @@ def authCode():
         print format_exc()
 
 
+@login_required
 @app.route("/setting", methods=['GET', ])
 def setting():
     # 对自己的主页进行设置
     try:
-        return render_template("setting.html")
+        return render_template("setting.html", name=session["user"])
     except:
         print format_exc()
 
+
+@login_required
+@app.route("/logout", methods=['GET', ])
+def logout():
+    try:
+        print "logout"
+        session.pop('user')
+        session.pop('myDomain')
+        print session
+        return redirect(url_for('app.index'))
+    except:
+        print format_exc()
 
 if __name__ == '__main__':
     app.secret_key = 'In0rderToUseSessionKeyisNeed'

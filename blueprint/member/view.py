@@ -3,7 +3,7 @@
 from dataPersist.db import education, resume, work
 
 __author__ = 'yujinghui'
-
+from flask.ext.login import login_required
 from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
 from functools import wraps
 from traceback import format_exc
@@ -52,3 +52,24 @@ def resumePage(myDomain):
         return render_template("member.html", resu=resu, educ=enumerate(educ), work=enumerate(wrk))
     except:
         print format_exc()
+
+@login_required
+@member.route('/setDomain', methods=['POST', ])
+def setDomain():
+    try:
+        dm = request.form[""];
+        resu = resume().update(myDomain=dm).where(username=session['user'])
+        if resu ==1:
+            return jsonify({"status": 1, "msg": "setting domain OK"})
+        else:
+            return jsonify({"status": 1, "msg": "设置失败请稍后再试"})
+    except:
+        print format_exc()
+
+
+@login_required
+@member.route('/home/<myDomain>', methods=['POST', ])
+def home(myDomain):
+    return render_template("register.html")
+
+

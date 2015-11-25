@@ -8,15 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
     <title>{{ resu.realName }}的个人简历</title>
-
     <link href="/yujinghui/static/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="/yujinghui/static/css/grayscale.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
     <link href="/yujinghui/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="/yujinghui/static/js/jquery-2.1.4.min.js"></script>
     <script src="/yujinghui/static/js/jquery.easing.min.js"></script>
@@ -63,9 +58,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h1 class="brand-heading"><a target="_blank" href="http://www.yujinghui.com">于敬晖</a></h1>
+                    <h1 class="brand-heading"><a target="_blank" href= "/home/{{ resu[0].myDomain }}">{{ resu[0].realName }}</a></h1>
 
-                    <p class="intro-text">{{ resu.intro }}</p>
+                    <p class="intro-text">{{ resu[0].intro }}</p>
                 </div>
             </div>
             <div class="row">
