@@ -1,52 +1,60 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from dataPersist.dbpool import dataConnectionPool
 
-cfg_info = {
-    "dbhost": "localhost",
-    "dbport": 3306,
-    "dbpasswd": "root",
-    "dbuser": "root",
-    "dbname": "resume"
-}
 
-host = cfg_info['dbhost']
-port = cfg_info['dbport']
-passwd = cfg_info['dbpasswd']
-user = cfg_info['dbuser']
-db = cfg_info['dbname']
+from dbpool import dataConnectionPool
+
+class FieldException(Exception):
+    def __init__(self):
+        pass
 
 
 class BaseModel(object):
-    __tableName__ = ""
+    pool = dataConnectionPool
 
-    @classmethod
-    def select(cls, *args):
-        sql = '''select * from {}'''.format(cls.__tableName__)
+    def __init__(self):
+        self.__sql__ = ""
 
-        return ""
+    def select(self, *args):
+        self.__sql__ = '''select {} from {}'''.format(",".join(args), self.__tablename__)
+        return self
 
-    @classmethod
-    def filter(cls, **kwars):
-        sql = '''where  {}'''.format(cls.__tableName__)
-        pass
+    def filter(self, **kwars):
+        if self.__sql__:
+            self.__sql__ = self.__sql__
+            con = self.pool.getConn()
+            cur = con.cursor()
+            cur.execute(self.__sql__)
+            res = cur.fetchall()
+            return self
+        else:
+            raise FieldException()
 
-    @classmethod
-    def insert(cls):
-        pass
+        return self
 
-    @classmethod
-    def update(cls):
-        pass
+    def insert(self):
+        return "OK"
 
-    @classmethod
-    def where(cls):
-        pass
+    def update(self, **kwargs):
+        return self
+
+    def where(self):
+        return "OK"
+
 
 class Resume(BaseModel):
-    __tableName__ = "resume"
+    __tablename__ = 'resume'
 
+    def __init__(self):
+        self.id = ""
+        self.realName = ""
+        self.sex = ""
+        self.intro = ""
+        self.userName = ""
+        self.password = ''
+
+
+if __name__ == "__main__":
+    re = Resume()
+    print re.select("userName", "intro").filter(name="jinghuiace@gmail.com", )

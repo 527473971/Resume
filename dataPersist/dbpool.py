@@ -2,11 +2,22 @@
 # coding=utf-8
 import MySQLdb
 import collections
-from db import host, user, passwd, db
-import logging
-import logging.config
 import threading
 
+
+cfg_info = {
+    "dbhost": "localhost",
+    "dbport": 3306,
+    "dbpasswd": "root",
+    "dbuser": "root",
+    "dbname": "resume"
+}
+
+host = cfg_info['dbhost']
+port = cfg_info['dbport']
+passwd = cfg_info['dbpasswd']
+user = cfg_info['dbuser']
+db = cfg_info['dbname']
 
 class DataConnectionPool():
     @staticmethod
