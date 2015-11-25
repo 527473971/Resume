@@ -56,6 +56,7 @@ class BaseModel(object):
         if self.__sql__:
             if len(condition_tuple) > 0:
                 self.__sql__ = "{} where {}".format(self.__sql__, "and ".join(condition_tuple))
+            print "where :", self.__sql__
             con = self.pool.getConn()
             try:
                 cur = con.cursor()

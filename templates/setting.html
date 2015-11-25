@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/form-elements.css">
     <link rel="shortcut icon" href="assets/ico/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>设置自己的偏好吧</title>
@@ -35,91 +34,120 @@
     </script>
 </head>
 
-<body>
-<div class="headerwrap">
-    <div class="container">
-        <div class="row centered">
-            <div class="col-lg-12">
-                <h1><strong>William T. Kelvin</strong></h1>
+<section>
+    <div id="section-topbar">
+        <div id="topbar-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="dropdown">
+                        <ul id="nav" class="nav">
+                            <li><a class="smoothScroll" href="#about" title="About">不知道<i
+                                    class="icon-user"></i></a></li>
+                            <li><a class="smoothScroll" href="#resume" title="Resume">动态<i
+                                    class="icon-file"></i></a></li>
+                            <li><a class="smoothScroll" href="#work" title="Works">退出<i
+                                    class="icon-briefcase"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
-<section id="about" name="about"></section>
-<div id="intro">
-    <div class="container">
+<section id="welcome" class="setting content-section text-center">
+    <div>
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-12">
+                    <h1><strong>设置自己的偏好吧</strong></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" name="about" class="setting content-section text-center">
+    <div class="container bg">
         <div class="row">
 
             <div class="col-lg-2 col-lg-offset-1">
-                <h5>ABOUT</h5>
+                <h5>个性域名</h5>
             </div>
-            <form>
-                <div class="col-lg-6">
-                    设置自己的个性域名吧, 设置以后就不能改咯<input type="text" id="mydomain">
-                </div>
-                <div class="col-lg-6 col-lg-offset-3">
-                    上传自己的头像 <input type="file" id="myprofile">
-                </div>
-                <div class="col-lg-6 col-lg-offset-3">
-                    <input type="submit">
-                </div>
-            </form>
+            <div>
+                <form>
+                    <div class="col-lg-6">
+                        设置自己的个性域名吧, 设置以后就不能改咯<input type="text" id="mydomain">
+                        <button type="button" class="mybtn" id="registerbtn">完成</button>
+                    </div>
+                </form>
+                <form>
+                    <div class="col-lg-6">
+                        上传自己的头像 <input type="file" id="myprofile" class="btn">
+                        <button type="button" class="mybtn">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-        </div>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2 col-lg-offset-1">
-            <h5>EDUCATION</h5>
+<section id="education" name="education" class="setting content-section text-center">
+    <div class="container bg">
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>教育经历</h5>
+            </div>
+            <div>
+                学校<input type="text">
+                专业<input type="text">
+                时间段:<input type="date">-<input type="date">
+                <a name="addEdu" class="btn">
+                    <i class="fa fa-minus-circle animated"></i>
+                </a>
+            </div>
         </div>
-        <div class="col-lg-6">
-            学校<input type="text">
+        <div class="row">
+            <a name="addEdu" class="btn">
+                <i class="fa fa-plus-circle animated"></i>
+            </a>
         </div>
-        <div class="col-lg-6 col-lg-offset-3">
-            专业<input type="text">
-        </div>
-        <div class="col-lg-6 col-lg-offset-3">
-            时间段:<input type="date">-<input type="date">
-        </div>
-    </div>
-    <div class="row">
-        <a name="addEdu" class="btn">
-            <i class="fa fa-plus-circle animated"></i>
-        </a>
-    </div>
-    <br>
-    <hr>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2 col-lg-offset-1">
-            <h5>WORK</h5>
+    </div>
+</section>
+
+<section id="work" name="work" class="setting content-section text-center">
+    <div class="container bg">
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>工作经验</h5>
+            </div>
+            <div>
+                公司<input type="text">
+                职位<input type="text">
+                时间段:<input type="date">-<input type="date">
+                <a name="addEdu" class="btn">
+                    <i class="fa fa-minus-circle animated"></i>
+                </a>
+            </div>
         </div>
-        <div class="col-lg-6">
-            学校<input type="text">
+        <div class="row">
+            <a name="addWork" class="btn">
+                <i class="fa fa-plus-circle animated"></i>
+            </a>
         </div>
-        <div class="col-lg-6 col-lg-offset-3">
-            专业<input type="text">
-        </div>
-        <div class="col-lg-6 col-lg-offset-3">
-            时间段:<input type="date">-<input type="date">
+
+    </div>
+</section>
+
+<section id="sbmt" name="sbmt" class="setting content-section text-center">
+    <div class="container">
+        <div class="row">
+            <button type="button" class="mybtn" id="gotoMyDomain">生成简历</button>
         </div>
     </div>
-    <div class="row">
-        <a name="addWork" class="btn">
-            <i class="fa fa-plus-circle animated"></i>
-        </a>
-    </div>
-    <br>
-    <hr>
-</div>
-<div role="form" class="login-form">
-    <input type="button" class="btn" id="gotoMyDomain">去我的简历看看吧(目前模板不多你们看着办)</button>
-</div>
+</section>
 </body>
 </html>

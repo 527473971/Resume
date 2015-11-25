@@ -42,7 +42,8 @@ def login():
         postName = request.form["form-username"]
         postpassword = request.form["form-password"]
         resu = resume().select("password", "myDomain").where(username=postName)
-        if resu is None:
+        print resu
+        if resu is None or len(resu) == 0:
             return jsonify({"status": 0, "msg": "用户不存在"})
         if genMd5(postpassword) == resu[0].password:
             session['user'] = postName

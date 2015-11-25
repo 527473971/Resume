@@ -35,9 +35,7 @@
                     if (mesg['status'] == 1) {
                         window.location = mesg['nexturl'];
                     } else {
-                        res.show();
-                        res.append(mesg["msg"]);
-                        showDiv(res);
+                        lgnbtn.popover();
                     }
 
                 });
@@ -60,7 +58,7 @@
 
                     <div class="description">
                         <p>
-                            你现在的工作不错,但是你也不会拒绝更好的,所以试试把你的简历放到internet上,让其他人发现你.
+                            试试把你的简历放到internet上,让机会发现你吧.
                         </p>
                     </div>
                 </div>
@@ -87,7 +85,9 @@
                                 <input type="password" name="form-password" placeholder="密码"
                                        class="form-password form-control" id="form-password">
                             </div>
-                            <button type="button" class="btn" id="lgnbtn">登录</button>
+                            <button type="button" class="btn" id="lgnbtn" data-toggle="popover" data-placement="right"
+                                    data-content="啊哦,登录失败了">登录
+                            </button>
                         </div>
                     </div>
                 </div>
