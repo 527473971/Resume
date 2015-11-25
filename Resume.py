@@ -8,6 +8,7 @@ from sqlalchemy import Table
 from blueprint.member.view import member
 from Utils.Utils import create_validata_code, genMd5, sendVerifyEmail
 import io
+from dataPersist.db import resume
 from dataPersist.dbpool import dataConnectionPool
 
 app = Flask('Resume', template_folder="templates/",
@@ -23,7 +24,9 @@ app.jinja_env.variable_end_string = ' }}'
 
 @app.teardown_request
 def shutdown_session(exception=None):
-    db_session.remove()
+    pass
+    # 这里要把数据库连接池销毁
+
 
 @app.route("/", methods=['GET'])
 def index():
@@ -38,12 +41,14 @@ def login():
     try:
         postName = request.form["form-username"]
         postpassword = request.form["form-password"]
-        resu = Resume.query.filter(Resume.userName == postName).first()
+        resu = resume().select("password", "myDomain").where(username=postName)
         if resu is None:
             return jsonify({"status": 0, "msg": "用户不存在"})
-        if genMd5(postpassword) == resu.password:
+        if genMd5(postpassword) == resu[0].password:
             session['user'] = postName
-            return jsonify({"status": 1, "msg": "登录成功", "nexturl": resu.myDomain})
+            if resu[0].myDomain is None or resu[0].myDomain == 'null' or len(resu[0].myDomain) == 0:
+                resu[0].myDomain = 'setting'
+            return jsonify({"status": 1, "msg": "登录成功", "nexturl": resu[0].myDomain})
         else:
             return jsonify({{"status": 0, "msg": "用户或密码错误"}})
     except:
@@ -57,13 +62,13 @@ def register():
             print request.method
             authcode = request.form['form-verify']
             email = request.form['form-username']
-            password = request.form['form-password']
+            password = genMd5(request.form['form-password'])
             name = request.form['form-name']
             print '==>', authcode.upper(), session["auth_code"].upper()
             if session["auth_code"].upper() == authcode.upper():
-
-                registerSuccess = "OK"
-                print "registerSuccess", registerSuccess
+                re = resume()
+                registerSuccess = re.insert(username=email, password=password, realName=name)
+                # 如果插入失败registerSuccess返回啥哩?
                 if registerSuccess:
                     try:
                         emailUrl = sendVerifyEmail(email)
@@ -100,7 +105,6 @@ def authCode():
         print format_exc()
 
 
-
 @app.route("/setting", methods=['GET', ])
 def setting():
     # 对自己的主页进行设置
@@ -111,6 +115,5 @@ def setting():
 
 
 if __name__ == '__main__':
-    init_db()
     app.secret_key = 'In0rderToUseSessionKeyisNeed'
     app.run(port=9007)

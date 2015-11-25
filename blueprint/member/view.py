@@ -1,5 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
+from dataPersist.db import education, resume, work
+
 __author__ = 'yujinghui'
 
 from flask import Blueprint, render_template, request, redirect, url_for, session, jsonify
@@ -7,10 +9,9 @@ from functools import wraps
 from traceback import format_exc
 
 member = Blueprint('member', __name__, static_url_path="/yujinghui/static",
-                      static_folder="static/",
-                      template_folder='templates/')
+                   static_folder="static/",
+                   template_folder='templates/')
 
-from dataPersist.models import Resume, Education, Work
 from traceback import format_exc
 
 
@@ -22,6 +23,7 @@ def isauth(f):
             return f(*args, **kwargs)
 
     return decorated_function
+
 
 @member.route('/commUI', methods=['GET', ])
 def commUI():
@@ -39,13 +41,14 @@ def exeComm():
     except:
         print format_exc()
 
+
 @member.route('/<myDomain>', methods=['GET', ])
-def resume(myDomain):
-    print myDomain
+def resumePage(myDomain):
     try:
-        resu = Resume.query.filter(Resume.myDomain == myDomain).first()
-        educ = Education.query.filter(Education.uid == resu.id).all()
-        work = Work.query.filter(Work.uid == resu.id).all()
-        return render_template("member.html", resu=resu, educ=enumerate(educ), work=enumerate(work))
+        print "myDomain:", myDomain
+        resu = resume().select("*").where(myDomain=myDomain)
+        educ = education().select("*").where(uid=resu[0].id)
+        wrk = work().select("*").where(uid=resu[0].id)
+        return render_template("member.html", resu=resu, educ=enumerate(educ), work=enumerate(wrk))
     except:
         print format_exc()
